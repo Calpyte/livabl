@@ -1,14 +1,15 @@
 package com.calpyte.livabl.domain;
 
 import lombok.Data;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Entity
 @Data
-@Table(name="sample")
-public class Sample extends AuditableBase{
+@Entity
+@Table(name = "role")
+@Where(clause = "is_deleted = false")
+public class Role extends IdentifiableBase{
     private String name;
-
 }
