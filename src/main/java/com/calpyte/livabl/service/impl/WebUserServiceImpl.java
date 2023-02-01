@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class WebUserServiceImpl implements WebUserService {
@@ -33,6 +34,6 @@ public class WebUserServiceImpl implements WebUserService {
 
     @Override
     public List<WebUser> saveAll(List<WebUser> users) {
-        return userDAO.saveAll(users);
+        return userDAO.saveAll(users.stream().map(user -> {Mapper.setAuditable(user); return user; }).collect(Collectors.toList()));
     }
 }

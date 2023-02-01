@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Where(clause = "is_deleted = false")
 public class Client extends  AuditableBase{
 
-    public enum Active{YES,NO}
+    public enum Active{YES,NO,REMOVE}
 
     @JsonProperty("email")
     private String email;
@@ -23,7 +23,25 @@ public class Client extends  AuditableBase{
     @JsonProperty("active")
     private Active active;
 
-    @JsonProperty("eemail")
-    private String emailId;
+    @JsonProperty("currency")
+    private String currency;
+
+    @JsonProperty("pocnumber")
+    private String pocNumber;
+
+    @JsonProperty("pocnumber")
+    private String pocName;
+
+    @JsonProperty("noofemployees")
+    private String noOfEmployees;
+
+    @JsonProperty("website")
+    private String website;
+
+    @JsonProperty("address")
+    private String address;
+
+    @JsonProperty("description")
+    private String description;
 
 }
