@@ -2,9 +2,7 @@ package com.calpyte.livabl.service.impl;
 
 import com.calpyte.livabl.dao.RoleDAO;
 import com.calpyte.livabl.domain.Role;
-import com.calpyte.livabl.domain.WebUser;
 import com.calpyte.livabl.service.RoleService;
-import com.calpyte.livabl.util.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

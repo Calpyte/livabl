@@ -47,12 +47,12 @@ public class Mapper {
 	}
 
 	public static <E> void setAuditable(AuditableBase object) {
-		AuditableBase auditable = (AuditableBase) object;
+		AuditableBase auditable = object;
 		auditable.setCreatedDate(new Date());
 		auditable.setUpdatedDate(new Date());
 		auditable.setCreatedUser("admin");
 		auditable.setUpdatedUser("admin");
-		auditable.setBranch("calpyte");
+		auditable.setClient("calpyte");
 		auditable.setIsDeleted(false);
 	}
 
@@ -62,7 +62,7 @@ public class Mapper {
 		auditable.setUpdatedDate(new Date());
 		auditable.setCreatedUser(user);
 		auditable.setUpdatedUser(user);
-		auditable.setBranch("calpyte");
+		auditable.setClient("calpyte");
 		auditable.setIsDeleted(false);
 	}
 

@@ -36,9 +36,10 @@ public class AuditableBase extends IdentifiableBase {
     @LastModifiedDate
     private Date updatedDate;
 
-    private String branch;
+    private String client;
 
     @Column(columnDefinition = "boolean default false")
     private Boolean isDeleted;
+
 }
 
