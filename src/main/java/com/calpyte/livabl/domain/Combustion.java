@@ -1,5 +1,6 @@
 package com.calpyte.livabl.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.hibernate.annotations.OnDelete;
@@ -10,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import java.util.Date;
 
 @Data
 @Entity
@@ -19,6 +22,12 @@ public class Combustion extends AuditableBase{
     private String facilityCode;
     private String facilityName;
     private Double quantity;
+
+    @JsonIgnore
+    private Date combustionDate;
+
+    @Transient
+    private String combustionDateStr;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "type_id", nullable = true)
