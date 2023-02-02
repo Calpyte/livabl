@@ -1,9 +1,7 @@
 package com.calpyte.livabl.controller;
 
 import com.calpyte.livabl.configuration.CustomException;
-import com.calpyte.livabl.domain.CatalogueType;
 import com.calpyte.livabl.domain.Combustion;
-import com.calpyte.livabl.service.CatalogueTypeService;
 import com.calpyte.livabl.service.CombustionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -24,7 +23,7 @@ public class CombustionController {
     private CombustionService combustionService;
 
     @PostMapping(value = "/save")
-    public ResponseEntity<Combustion> save(@RequestBody Combustion combustion) throws CustomException {
+    public ResponseEntity<Combustion> save(@RequestBody Combustion combustion) throws CustomException, ParseException {
         return new ResponseEntity<>(combustionService.save(combustion), HttpStatus.CREATED);
     }
 
