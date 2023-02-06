@@ -29,7 +29,7 @@ public class Client extends  AuditableBase{
     @JsonProperty("pocnumber")
     private String pocNumber;
 
-    @JsonProperty("pocnumber")
+    @JsonProperty("pocname")
     private String pocName;
 
     @JsonProperty("noofemployees")
