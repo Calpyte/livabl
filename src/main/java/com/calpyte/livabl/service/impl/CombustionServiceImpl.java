@@ -7,8 +7,8 @@ import com.calpyte.livabl.util.DateUtil;
 import com.calpyte.livabl.util.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
