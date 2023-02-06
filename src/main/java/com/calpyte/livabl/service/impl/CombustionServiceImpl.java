@@ -49,6 +49,6 @@ public class CombustionServiceImpl implements CombustionService {
 
     @Override
     public List<Combustion> saveAll(List<Combustion> combustions) {
-        return combustionDAO.saveAll(combustions.stream().map(combustion -> {Mapper.setAuditable(combustion); return combustion;}).collect(Collectors.toList()));
+        return combustionDAO.saveAll(combustions.stream().map(combustion -> {Mapper.setAuditable(toDate(combustion)); return combustion;}).collect(Collectors.toList()));
     }
 }
