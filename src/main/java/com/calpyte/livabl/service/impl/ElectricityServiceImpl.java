@@ -5,14 +5,13 @@ import com.calpyte.livabl.domain.ElectricityConsumption;
 import com.calpyte.livabl.service.ElectricityService;
 import com.calpyte.livabl.util.DateUtil;
 import com.calpyte.livabl.util.Mapper;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.util.List;
 
-import static org.keycloak.common.util.Time.toDate;
-
+@Service
 public class ElectricityServiceImpl implements ElectricityService {
 
     @Autowired

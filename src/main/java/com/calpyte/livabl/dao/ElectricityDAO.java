@@ -9,7 +9,7 @@ public interface ElectricityDAO {
 
     ElectricityConsumption save(ElectricityConsumption electricityConsumption);
 
-//    List<ElectricityConsumption> saveAll(List<ElectricityConsumption> electricityConsumptions);
+    List<ElectricityConsumption> saveAll(List<ElectricityConsumption> electricityConsumptions);
 
     List<ElectricityConsumption> findAll();
 
