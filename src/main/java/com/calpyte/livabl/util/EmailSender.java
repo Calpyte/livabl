@@ -38,7 +38,6 @@ public class EmailSender {
 
     public String geContentFromTemplate(Map< String, Object > model)     {
         StringBuffer content = new StringBuffer();
-
         try {
 //            content.append(FreeMarkerTemplateUtils.processTemplateIntoString(fmConfiguration.getTemplate("email-template.flth"), model));
         } catch (Exception e) {
