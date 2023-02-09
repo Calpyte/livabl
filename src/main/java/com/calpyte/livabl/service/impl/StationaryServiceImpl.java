@@ -23,8 +23,8 @@ public class StationaryServiceImpl implements StationaryService {
     @Override
     public StationaryCombustion save(StationaryCombustion combustion) throws ParseException {
         combustion.setCombustionDate(
-                combustion.getCombustionDateStr()!=null&&!combustion.getCombustionDateStr().isEmpty() ?
-                        DateUtil.StringToDate(combustion.getCombustionDateStr()) : null
+                combustion.getDate()!=null&&!combustion.getDate().isEmpty() ?
+                        DateUtil.StringToDate(combustion.getDate()) : null
         );
         Mapper.setAuditable(toDate(combustion));
         return stationaryDAO.save(combustion);
@@ -33,8 +33,8 @@ public class StationaryServiceImpl implements StationaryService {
     private StationaryCombustion toDate(StationaryCombustion combustion) {
         try{
             combustion.setCombustionDate(
-                    combustion.getCombustionDateStr()!=null&&!combustion.getCombustionDateStr().isEmpty() ?
-                            DateUtil.StringToDate(combustion.getCombustionDateStr()) : null
+                    combustion.getDate()!=null&&!combustion.getDate().isEmpty() ?
+                            DateUtil.StringToDate(combustion.getDate()) : null
             );
         }catch (Exception e){ System.out.println(e);}
         return combustion;

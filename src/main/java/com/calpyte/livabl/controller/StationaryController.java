@@ -19,13 +19,13 @@ import java.text.ParseException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/stationary")
+@RequestMapping("/scomp")
 public class StationaryController {
 
     @Autowired
     private StationaryService stationaryService;
 
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/")
     public ResponseEntity<StationaryCombustion> save(@RequestBody StationaryCombustion combustion) throws CustomException, ParseException {
         return new ResponseEntity<>(stationaryService.save(combustion), HttpStatus.CREATED);
     }
