@@ -9,7 +9,7 @@ import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import javax.ws.rs.core.Configuration;
+//import javax.ws.rs.core.Configuration;
 import java.io.IOException;
 import java.util.Map;
 
@@ -18,8 +18,8 @@ public class EmailSender {
     @Autowired
     private JavaMailSender javaMailSender;
 
-    @Autowired
-    Configuration fmConfiguration;
+//    @Autowired
+//    Configuration fmConfiguration;
 
     public void sendEmail(Message mail) {
         MimeMessage mimeMessage =javaMailSender.createMimeMessage();

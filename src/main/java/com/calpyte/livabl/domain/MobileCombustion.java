@@ -1,5 +1,6 @@
 package com.calpyte.livabl.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -11,35 +12,49 @@ import java.util.Date;
 @Entity
 public class MobileCombustion extends AuditableBase{
     private String name;
-    private String facilityName;
-    private String facilityCode;
-    private Double quantity;
 
+    @JsonProperty("facility")
+    private String facilityName;
+
+    @JsonProperty("code")
+    private String facilityCode;
+
+    private Double quantity;
+    private String fuel;
     private Double weight;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "transport_id", nullable = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","catalogueType"})
-    private Catalogue transport;
+    @JsonProperty("mode")
+    private String transport;
 
-    private Date mblDate;
+    @JsonProperty("date")
+    private Date mobileDate;
 
     @Transient
-    private String mblDateStr;
+    private String mobileDateStr;
 
     private String category;
+
+    @JsonProperty("subcat")
     private String subCategory;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "input_type_id", nullable = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler","catalogueType"})
-    private Catalogue inputType;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+//    @JoinColumn(name = "input_distance_id", nullable = true)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler","catalogueType"})
+    @JsonProperty("literdistance")
+    private String inputDistance;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "category_input_id", nullable = true)
-    @OnDelete(action =  OnDeleteAction.CASCADE)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler","catalogueType"})
-    private Catalogue categoryInput;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+//    @JoinColumn(name = "category_input_id", nullable = true)
+//    @OnDelete(action =  OnDeleteAction.CASCADE)
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler","catalogueType"})
+    private String air;
+
+    @JsonProperty("nonroad")
+    private String nonRoad;
+
+    private String road;
+    private String air2;
+    private String water;
+    private String rail;
 }

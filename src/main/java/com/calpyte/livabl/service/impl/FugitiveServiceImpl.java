@@ -4,6 +4,7 @@ import com.calpyte.livabl.dao.FugitiveDAO;
 import com.calpyte.livabl.dao.MobileDAO;
 import com.calpyte.livabl.domain.FugitiveEmission;
 import com.calpyte.livabl.domain.MobileCombustion;
+import com.calpyte.livabl.domain.StationaryCombustion;
 import com.calpyte.livabl.service.FugitiveService;
 import com.calpyte.livabl.util.DateUtil;
 import com.calpyte.livabl.util.Mapper;
@@ -23,11 +24,11 @@ public class FugitiveServiceImpl implements FugitiveService {
 
     @Override
     public FugitiveEmission save(FugitiveEmission emission) throws ParseException {
-        emission.setFugitiveDate(
-                emission.getFugitiveDateStr()!=null&&!emission.getFugitiveDateStr().isEmpty() ?
-                        DateUtil.StringToDate(emission.getFugitiveDateStr()) : null
-        );
-        Mapper.setAuditable(toDate(emission));
+//        emission.setFugitiveDate(
+//                emission.getFugitiveDateStr()!=null&&!emission.getFugitiveDateStr().isEmpty() ?
+//                        DateUtil.StringToDate(emission.getFugitiveDateStr()) : null
+//        );
+        Mapper.setAuditable(emission);
         return fugitiveDAO.save(emission);
     }
 
@@ -41,6 +42,16 @@ public class FugitiveServiceImpl implements FugitiveService {
         return emission;
     }
 
+    private FugitiveEmission toString(FugitiveEmission emission) {
+        try{
+            emission.setFugitiveDateStr(
+                    emission.getFugitiveDate()!=null ?
+                            DateUtil.DateToString(emission.getFugitiveDate()) : null
+            );
+        }catch (Exception e){ System.out.println(e);}
+        return emission;
+    }
+
 
     @Override
     public FugitiveEmission findById(String id) {
@@ -48,7 +59,9 @@ public class FugitiveServiceImpl implements FugitiveService {
     }
 
     @Override
-    public List<FugitiveEmission> findAll() {return fugitiveDAO.findAll();}
+    public List<FugitiveEmission> findAll() {
+        return fugitiveDAO.findAll().stream().map(this::toString).collect(Collectors.toList());
+    }
 
     @Override
     public List<FugitiveEmission> saveAll(List<FugitiveEmission> fugitiveEmissions) {
