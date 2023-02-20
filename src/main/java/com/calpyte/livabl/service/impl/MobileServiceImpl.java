@@ -21,19 +21,29 @@ public class MobileServiceImpl implements MobileService {
 
     @Override
     public MobileCombustion save(MobileCombustion combustion) throws ParseException {
-        combustion.setMblDate(
-                combustion.getMblDateStr()!=null&&!combustion.getMblDateStr().isEmpty() ?
-                        DateUtil.StringToDate(combustion.getMblDateStr()) : null
-        );
-        Mapper.setAuditable(toDate(combustion));
+//        combustion.setMblDate(
+//                combustion.getMblDateStr()!=null&&!combustion.getMblDateStr().isEmpty() ?
+//                        DateUtil.StringToDate(combustion.getMblDateStr()) : null
+//        );
+        Mapper.setAuditable(combustion);
         return mobileDAO.save(combustion);
     }
 
     private MobileCombustion toDate(MobileCombustion combustion) {
         try{
-            combustion.setMblDate(
-                    combustion.getMblDateStr()!=null&&!combustion.getMblDateStr().isEmpty() ?
-                            DateUtil.StringToDate(combustion.getMblDateStr()) : null
+            combustion.setMobileDate(
+                    combustion.getMobileDateStr()!=null&&!combustion.getMobileDateStr().isEmpty() ?
+                            DateUtil.StringToDate(combustion.getMobileDateStr()) : null
+            );
+        }catch (Exception e){ System.out.println(e);}
+        return combustion;
+    }
+
+    private MobileCombustion toString(MobileCombustion combustion) {
+        try{
+            combustion.setMobileDateStr(
+                    combustion.getMobileDate()!=null ?
+                            DateUtil.DateToString(combustion.getMobileDate()) : null
             );
         }catch (Exception e){ System.out.println(e);}
         return combustion;
@@ -46,11 +56,12 @@ public class MobileServiceImpl implements MobileService {
     }
 
     @Override
-    public List<MobileCombustion> findAll() {return mobileDAO.findAll();}
+    public List<MobileCombustion> findAll() {
+        return mobileDAO.findAll().stream().map(this::toString).collect(Collectors.toList());}
 
     @Override
-    public List<MobileCombustion> saveAll(List<MobileCombustion> stationaryCombustions) {
-        return mobileDAO.saveAll(stationaryCombustions.stream().map(mobile ->{
+    public List<MobileCombustion> saveAll(List<MobileCombustion> mobileCombustions) {
+        return mobileDAO.saveAll(mobileCombustions.stream().map(mobile ->{
             Mapper.setAuditable(toDate(mobile));
             return mobile;
         }).collect(Collectors.toList()));

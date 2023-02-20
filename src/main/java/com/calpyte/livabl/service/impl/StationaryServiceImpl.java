@@ -22,11 +22,11 @@ public class StationaryServiceImpl implements StationaryService {
 
     @Override
     public StationaryCombustion save(StationaryCombustion combustion) throws ParseException {
-        combustion.setCombustionDate(
-                combustion.getCombustionDateStr()!=null&&!combustion.getCombustionDateStr().isEmpty() ?
-                        DateUtil.StringToDate(combustion.getCombustionDateStr()) : null
-        );
-        Mapper.setAuditable(toDate(combustion));
+//        combustion.setCombustionDate(
+//                combustion.getCombustionDateStr()!=null&&!combustion.getCombustionDateStr().isEmpty() ?
+//                        DateUtil.StringToDate(combustion.getCombustionDateStr()) : null
+        //);
+        Mapper.setAuditable(combustion);
         return stationaryDAO.save(combustion);
     }
 
@@ -40,6 +40,16 @@ public class StationaryServiceImpl implements StationaryService {
         return combustion;
     }
 
+    private StationaryCombustion toString(StationaryCombustion combustion) {
+        try{
+            combustion.setCombustionDateStr(
+                    combustion.getCombustionDate()!=null ?
+                            DateUtil.DateToString(combustion.getCombustionDate()) : null
+            );
+        }catch (Exception e){ System.out.println(e);}
+        return combustion;
+    }
+
 
     @Override
     public StationaryCombustion findById(String id) {
@@ -48,7 +58,7 @@ public class StationaryServiceImpl implements StationaryService {
 
     @Override
     public List<StationaryCombustion> findAll() {
-        return stationaryDAO.findAll();
+        return stationaryDAO.findAll().stream().map(this::toString).collect(Collectors.toList());
     }
 
     @Override

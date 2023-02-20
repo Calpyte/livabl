@@ -1,6 +1,6 @@
 package com.calpyte.livabl.domain;
 
-import com.keycloak.connector.config.EnableKeycloak;
+//import com.keycloak.connector.config.EnableKeycloak;
 import lombok.Data;
 
 import javax.persistence.Entity;
