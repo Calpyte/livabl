@@ -20,19 +20,30 @@ public class CapitalGoodsServiceImpl implements CapitalGoodsService {
 
     @Override
     public CapitalGoods save(CapitalGoods capitalGoods) throws ParseException {
-        capitalGoods.setDate(
-                capitalGoods.getDateStr()!=null&&!capitalGoods.getDateStr().isEmpty() ?
-                        DateUtil.StringToDate(capitalGoods.getDateStr()) : null
-        );
-        Mapper.setAuditable(toDate(capitalGoods));
+//        capitalGoods.setCapitalDate(
+//                capitalGoods.getCapitalDateStr()!=null&&!capitalGoods.getCapitalDateStr().isEmpty() ?
+//                        DateUtil.StringToDate(capitalGoods.getCapitalDateStr()) : null
+//        );
+        Mapper.setAuditable(capitalGoods);
         return capitalGoodsDAO.save(capitalGoods);
     }
 
     private CapitalGoods toDate(CapitalGoods capitalGoods) {
         try{
-            capitalGoods.setDate(
-                    capitalGoods.getDateStr()!=null&&!capitalGoods.getDateStr().isEmpty() ?
-                            DateUtil.StringToDate(capitalGoods.getDateStr()) : null
+            capitalGoods.setCapitalDate(
+                    capitalGoods.getCapitalDateStr()!=null&&!capitalGoods.getCapitalDateStr().isEmpty() ?
+                            DateUtil.StringToDate(capitalGoods.getCapitalDateStr()) : null
+            );
+        }catch (Exception e){ System.out.println(e);}
+        return capitalGoods;
+    }
+
+
+    private CapitalGoods toString(CapitalGoods capitalGoods) {
+        try{
+            capitalGoods.setCapitalDateStr(
+                    capitalGoods.getCapitalDate()!=null ?
+                            DateUtil.DateToString(capitalGoods.getCreatedDate()) : null
             );
         }catch (Exception e){ System.out.println(e);}
         return capitalGoods;
@@ -45,7 +56,8 @@ public class CapitalGoodsServiceImpl implements CapitalGoodsService {
     }
 
     @Override
-    public List<CapitalGoods> findAll() {return capitalGoodsDAO.findAll();}
+    public List<CapitalGoods> findAll() {
+        return capitalGoodsDAO.findAll().stream().map(this::toString).collect(Collectors.toList());}
 
     @Override
     public List<CapitalGoods> saveAll(List<CapitalGoods> capitalGoods) {

@@ -1,7 +1,6 @@
 package com.calpyte.livabl.service.impl;
 
 import com.calpyte.livabl.dao.StationaryDAO;
-import com.calpyte.livabl.domain.Combustion;
 import com.calpyte.livabl.domain.StationaryCombustion;
 import com.calpyte.livabl.service.StationaryService;
 import com.calpyte.livabl.util.DateUtil;
