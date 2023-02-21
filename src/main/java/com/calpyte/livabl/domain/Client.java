@@ -21,7 +21,7 @@ public class Client extends  AuditableBase{
     private String pass;
 
     @JsonProperty("active")
-    private Active active;
+    private String active;
 
     @JsonProperty("currency")
     private String currency;

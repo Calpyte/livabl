@@ -22,16 +22,12 @@ public class ElectricityConsumption extends AuditableBase{
     @JsonProperty("fuel")
     private String energy;
 
+    @JsonProperty("date")
     private Date electricityDate;
 
     @Transient
     private String electricityDateStr;
 
-//    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-//    @JoinColumn(name = "solar_id", nullable = true)
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "catalogueType"})
-    //private Catalogue solar;
 
     @JsonProperty("quantity")
     private Double energyConsumption;

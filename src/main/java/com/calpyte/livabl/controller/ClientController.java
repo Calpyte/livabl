@@ -1,6 +1,8 @@
 package com.calpyte.livabl.controller;
 
+import com.calpyte.livabl.configuration.CustomException;
 import com.calpyte.livabl.domain.Client;
+import com.calpyte.livabl.dto.ClientUpdateDTO;
 import com.calpyte.livabl.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,8 +26,13 @@ public class ClientController {
     private ClientService clientService;
 
     @PostMapping(value = "/save")
-    public ResponseEntity<Client> save(@RequestBody Client client){
+    public ResponseEntity<Client> save(@RequestBody Client client) throws CustomException {
         return new ResponseEntity<>(clientService.save(client), HttpStatus.CREATED);
+    }
+
+    @PostMapping(value = "/update")
+    public ResponseEntity<ClientUpdateDTO> update(@RequestBody ClientUpdateDTO updateDTO) throws CustomException {
+        return new ResponseEntity<>(clientService.update(updateDTO), HttpStatus.CREATED);
     }
 
     @PostMapping(value = "/save-all")
