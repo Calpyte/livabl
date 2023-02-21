@@ -1,24 +1,28 @@
 package com.calpyte.livabl.controller;
 
 import com.calpyte.livabl.configuration.CustomException;
-import com.calpyte.livabl.domain.Role;
 import com.calpyte.livabl.dto.LoginDTO;
 import com.calpyte.livabl.dto.RegisterDTO;
 import com.calpyte.livabl.dto.ResponseTokenDTO;
 import com.calpyte.livabl.service.AppUserService;
+import com.calpyte.livabl.service.SuperAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
-public class AppUserController {
-
+@RequestMapping("/admin")
+public class SuperAdminController {
     @Autowired
-    private AppUserService userService;
+    private SuperAdminService userService;
 
     @PostMapping(value = "register")
     public ResponseEntity<ResponseTokenDTO> register(@RequestBody RegisterDTO user) throws CustomException {

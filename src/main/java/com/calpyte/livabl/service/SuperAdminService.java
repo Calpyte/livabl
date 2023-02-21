@@ -8,8 +8,7 @@ import com.calpyte.livabl.dto.ResponseTokenDTO;
 import java.util.List;
 import java.util.Map;
 
-public interface AppUserService {
-
+public interface SuperAdminService {
     ResponseTokenDTO save(RegisterDTO registerDTO) throws CustomException;
 
     RegisterDTO findById(String id);
@@ -18,5 +17,5 @@ public interface AppUserService {
 
     ResponseTokenDTO login(LoginDTO loginDTO) throws CustomException;
 
-    ResponseTokenDTO validateUser(Map<String,String> headers) throws CustomException;
+    ResponseTokenDTO validateAdmin(Map<String,String> headers) throws CustomException;
 }

@@ -1,6 +1,5 @@
 package com.calpyte.livabl.domain;
 
-
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -8,8 +7,8 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "app_user")
-public class AppUser extends AuditableBase{
+@Table(name = "super_admin")
+public class SuperAdmin extends AuditableBase{
     private String cpassword;
     private String email;
     private String fname;
