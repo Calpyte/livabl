@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -28,6 +29,12 @@ public class AppUserController {
     @PostMapping(value = "login")
     public ResponseEntity<ResponseTokenDTO> login(@RequestBody LoginDTO loginDTO) throws CustomException {
         return new ResponseEntity<>(userService.login(loginDTO), HttpStatus.CREATED);
+    }
+
+    @GetMapping(value = "/logout")
+    public ResponseEntity<?> logout(@RequestHeader Map<String,String> headers) throws CustomException {
+        userService.logout(headers);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 
