@@ -15,4 +15,6 @@ public interface AppUserDAO {
     List<AppUser> findAll();
 
     AppUser validate(String email,String pass);
-}
+
+    AppUser findByToken(String token);
+};

@@ -32,4 +32,9 @@ public class AppUserDAOImpl implements AppUserDAO {
     public AppUser validate(String email, String pass) {
         return userRepository.findByEmailAndPassword(email,pass);
     }
+
+    @Override
+    public AppUser findByToken(String token) {
+        return userRepository.findByToken(token);
+    }
 }
