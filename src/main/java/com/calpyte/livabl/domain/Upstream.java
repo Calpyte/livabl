@@ -1,6 +1,7 @@
 package com.calpyte.livabl.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -11,83 +12,148 @@ import java.util.Date;
 @Data
 @Entity
 public class Upstream extends AuditableBase{
-    private Date date;
+
+    @JsonProperty("date")
+    private Date upstreamDate;
 
     @Transient
-    private String dateStr;
+    private String upstreamDateStr;
 
+    @JsonProperty("code")
     private String facilityCode;
+
+    @JsonProperty("byername")
     private String buyerName;
+
+    @JsonProperty("byerlocation")
     private String buyerLocation;
+
+    @JsonProperty("facility")
     private String facilityName;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "select_transport_id", nullable = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","catalogueType"})
-    private Catalogue selectTransport;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+//    @JoinColumn(name = "select_transport_id", nullable = true)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","catalogueType"})
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "select_vehicle_id", nullable = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","catalogueType"})
-    private Catalogue selectVehicle;
+    @JsonProperty("transport")
+    private String selectTransport;
 
+//    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+//    @JoinColumn(name = "select_vehicle_id", nullable = true)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","catalogueType"})
+
+    @JsonProperty("vehicle")
+    private String selectVehicle;
+
+    @JsonProperty("distance")
     private Long   distanceTravelled;
+
+    @JsonProperty("quantity")
     private Long   quantity;
+
+    @JsonProperty("material")
     private String material;
 
     //Waste Generated
-    private String wsFacilityName;
-    private String wsFacilityCode;
-    private String wsWasteType;
-    private String wsDispose;
-    private String wsQuantity;
+
+    @JsonProperty("facility2")
+    private String wasteFacilityName;
+
+    @JsonProperty("code2")
+    private String wasteFacilityCode;
+
+    @JsonProperty("waste")
+    private String wasteWasteType;
+
+    @JsonProperty("dispose")
+    private String wasteDispose;
+
+    @JsonProperty("quantity2")
+    private String wasteQuantity;
 
     //Business Travel
-    private String btFacilityName;
-    private String btFacilityCode;
-    private String btEmployeeCode;
-    private String btEmployeeName;
-    private String btFrom;
-    private String btTo;
-    private Long   btDistanceTravelled;
+    @JsonProperty("facility3")
+    private String businessFacilityName;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "bt_select_transport_id", nullable = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","catalogueType"})
-    private Catalogue btSelectTransport;
+    @JsonProperty("code3")
+    private String businessFacilityCode;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "bt_select_vehicle_id", nullable = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","catalogueType"})
-    private Catalogue btSelectVehicle;
+    @JsonProperty("employeecode")
+    private String businessEmployeeCode;
+
+    @JsonProperty("employeename")
+    private String businessEmployeeName;
+
+    @JsonProperty("from")
+    private String businessFrom;
+
+    @JsonProperty("to")
+    private String businessTo;
+
+    @JsonProperty("distance2")
+    private Long   businessDistanceTravelled;
+
+//    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+//    @JoinColumn(name = "bt_select_transport_id", nullable = true)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","catalogueType"})
+
+    @JsonProperty("transport2")
+    private String businessSelectTransport;
+
+//    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+//    @JoinColumn(name = "bt_select_vehicle_id", nullable = true)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","catalogueType"})
+
+    @JsonProperty("vehicle2")
+    private String businessSelectVehicle;
 
     //Employee Commuting
-    private String ecFacilityName;
-    private String ecFacilityCode;
-    private String ecEmployeeCode;
-    private String ecEmployeeName;
-    private String ecFrom;
-    private String ecTo;
-    private Long   ecDistanceTravelled;
+    @JsonProperty("facility4")
+    private String employeeFacilityName;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "ec_select_transport_id", nullable = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","catalogueType"})
-    private Catalogue ecSelectTransport;
+    @JsonProperty("code4")
+    private String employeeFacilityCode;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "ec_select_vehicle_id", nullable = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","catalogueType"})
-    private Catalogue ecSelectVehicle;
+    @JsonProperty("employeecode2")
+    private String employeeEmployeeCode;
+
+    @JsonProperty("employeename2")
+    private String employeeEmployeeName;
+
+    @JsonProperty("from2")
+    private String employeeFrom;
+
+    @JsonProperty("to2")
+    private String employeeTo;
+
+    @JsonProperty("distance3")
+    private Long   employeeDistanceTravelled;
+//
+//    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+//    @JoinColumn(name = "ec_select_transport_id", nullable = true)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","catalogueType"})
+
+    @JsonProperty("transport3")
+    private String employeeSelectTransport;
+//
+//    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+//    @JoinColumn(name = "ec_select_vehicle_id", nullable = true)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","catalogueType"})
+
+    @JsonProperty("vehicle3")
+    private String employeeSelectVehicle;
 
     //Leased Assets
+    @JsonProperty("asset")
     private String leasedType;
+
+    @JsonProperty("period")
     private Long leasePeriod;
 
 

@@ -22,21 +22,31 @@ public class DownstreamServiceImpl implements DownstreamService{
 
     @Override
     public Downstream save(Downstream downstream) throws ParseException {
-        downstream.setDate(
-                downstream.getDateStr()!=null&&!downstream.getDateStr().isEmpty() ?
-                        DateUtil.StringToDate(downstream.getDateStr()) : null
-        );
-        Mapper.setAuditable(toDate(downstream));
+//        downstream.setDownstreamDate(
+//                downstream.getDownstreamDateStr()!=null&&!downstream.getDownstreamDateStr().isEmpty() ?
+//                        DateUtil.StringToDate(downstream.getDownstreamDateStr()) : null
+//        );
+        Mapper.setAuditable(downstream);
         return downstreamDAO.save(downstream);
     }
 
     private Downstream toDate(Downstream downstream) {
         try{
-            downstream.setDate(
-                    downstream.getDateStr()!=null&&!downstream.getDateStr().isEmpty() ?
-                            DateUtil.StringToDate(downstream.getDateStr()) : null
+            downstream.setDownstreamDate(
+                    downstream.getDownstreamDateStr()!=null&&!downstream.getDownstreamDateStr().isEmpty() ?
+                            DateUtil.StringToDate(downstream.getDownstreamDateStr()) : null
             );
         }catch (Exception e){ System.out.println(e);}
+        return downstream;
+    }
+
+    private Downstream toString(Downstream downstream){
+        try{
+            downstream.setDownstreamDateStr(
+                    downstream.getDownstreamDate()!=null ?
+                            DateUtil.DateToString(downstream.getDownstreamDate()) : null
+            );
+        }catch(Exception e) { System.out.println(e); }
         return downstream;
     }
 
@@ -47,7 +57,8 @@ public class DownstreamServiceImpl implements DownstreamService{
     }
 
     @Override
-    public List<Downstream> findAll() {return downstreamDAO.findAll();}
+    public List<Downstream> findAll() {
+        return downstreamDAO.findAll().stream().map(this::toString).collect(Collectors.toList());}
 
     @Override
     public List<Downstream> saveAll(List<Downstream> downstream) {
