@@ -19,4 +19,7 @@ public interface SubUserService {
     ResponseTokenDTO login(LoginDTO loginDTO) throws CustomException;
 
     ResponseTokenDTO validateSubUser(Map<String,String> headers) throws CustomException;
+
+    void logout(Map<String,String> headers);
+
 }

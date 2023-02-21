@@ -19,4 +19,7 @@ public interface AppUserService {
     ResponseTokenDTO login(LoginDTO loginDTO) throws CustomException;
 
     ResponseTokenDTO validateUser(Map<String,String> headers) throws CustomException;
+
+    void logout(Map<String,String> headers);
+
 }

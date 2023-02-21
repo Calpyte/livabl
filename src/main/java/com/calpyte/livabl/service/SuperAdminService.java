@@ -18,4 +18,7 @@ public interface SuperAdminService {
     ResponseTokenDTO login(LoginDTO loginDTO) throws CustomException;
 
     ResponseTokenDTO validateAdmin(Map<String,String> headers) throws CustomException;
+
+    void logout(Map<String,String> headers);
+
 }

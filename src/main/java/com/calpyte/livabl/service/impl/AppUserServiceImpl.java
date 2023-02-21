@@ -82,4 +82,16 @@ public class AppUserServiceImpl implements AppUserService {
             throw new CustomException("Invalid User");
         }
     }
+
+    @Override
+    public void logout(Map<String, String> headers) {
+        String token =  headers.get("authorization");
+        if(token!=null && !token.isEmpty()  && !token.equals("null")){
+            AppUser user  =  userDAO.findByToken(token);
+            if(user!=null && !ObjectUtils.isEmpty(user)) {
+                user.setToken(RandomStringUtils.random(30,true,true));
+                userDAO.save(user);
+            }
+        }
+    }
 }
