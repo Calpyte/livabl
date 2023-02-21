@@ -23,7 +23,7 @@ public class Message extends AuditableBase{
     @JsonProperty("subject")
     private String subject;
 
-    @JsonProperty("body")
+    @JsonProperty("text")
     @Column(columnDefinition = "text")
     private String body;
 }
