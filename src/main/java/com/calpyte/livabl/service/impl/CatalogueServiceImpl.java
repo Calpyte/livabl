@@ -33,6 +33,7 @@ public class CatalogueServiceImpl implements CatalogueService {
         return catalogue;
     }
 
+
     @Override
     public Catalogue findById(String id) {
         return catalogueDAO.findById(id).orElse(null);
