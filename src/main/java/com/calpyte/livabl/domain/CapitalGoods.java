@@ -1,9 +1,7 @@
 package com.calpyte.livabl.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,51 +9,83 @@ import java.util.Date;
 @Data
 @Entity
 public class CapitalGoods extends AuditableBase{
-    private Date Date;
+
+    @JsonProperty("date")
+    private Date capitalDate;
 
     @Transient
-    private String dateStr;
+    private String capitalDateStr;
 
+    @JsonProperty("code")
     private String facilityCode;
+
+    @JsonProperty("facility")
     private String facilityName;
+
+    @JsonProperty("byername")
     private String buyerName;
+
+    @JsonProperty("byerlocation")
     private String buyerLocation;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "select_transport_id", nullable = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","catalogueType"})
-    private Catalogue selectTransport;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+//    @JoinColumn(name = "select_transport_id", nullable = true)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","catalogueType"})
+    @JsonProperty("transport")
+    private String modeOfTransport;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "select_vehicle_id", nullable = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","catalogueType"})
-    private Catalogue selectVehicle;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+//    @JoinColumn(name = "select_vehicle_id", nullable = true)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","catalogueType"})
+    @JsonProperty("vehicle")
+    private String vehicleType;
 
-    private Double disTravelled;
-    private String matPurchased;
+    @JsonProperty("distance")
+    private Double distanceTravelled;
+
+    @JsonProperty("material")
+    private String materialPurchased;
+
     private String quantity;
 
-    private String vFacilityName;
-    private String vFacilityCode;
-    private Double vDisTravelled;
+    @JsonProperty("facility2")
+    private String vehicleFacilityName;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "v_select_transport", nullable = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","catalogueType"})
-    private Catalogue vSelectTransport;
+    @JsonProperty("code2")
+    private String vehicleFacilityCode;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "v_select_vehicle", nullable = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","catalogueType"})
-    private Catalogue vSelectType;
+    @JsonProperty("quantity2")
+    private Double vehicleDisTravelled;
 
-    private String bFacilityName;
-    private String bFacilityCode;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+//    @JoinColumn(name = "v_select_transport", nullable = true)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","catalogueType"})
+
+    @JsonProperty("transport2")
+    private String vehicleModeOfTransport;
+//
+//    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+//    @JoinColumn(name = "v_select_vehicle", nullable = true)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","catalogueType"})
+
+    @JsonProperty("vehicle2")
+    private String vehicleSelectedType;
+
+    @JsonProperty("facility3")
+    private String buildingFacilityName;
+
+    @JsonProperty("code3")
+    private String buildingFacilityCode;
+
+    @JsonProperty("employeecode")
     private Double buildingSize;
-    private String bLocation;
+
+    @JsonProperty("employeename")
+    private String buildingLocation;
+
     private String energy;
 }

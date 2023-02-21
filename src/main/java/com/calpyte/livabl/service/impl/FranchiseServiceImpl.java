@@ -2,6 +2,7 @@ package com.calpyte.livabl.service.impl;
 
 import com.calpyte.livabl.dao.FranchiseDAO;
 import com.calpyte.livabl.domain.Franchise;
+import com.calpyte.livabl.domain.StationaryCombustion;
 import com.calpyte.livabl.service.FranchiseService;
 import com.calpyte.livabl.util.DateUtil;
 import com.calpyte.livabl.util.Mapper;
@@ -19,19 +20,30 @@ public class FranchiseServiceImpl implements FranchiseService {
 
     @Override
     public Franchise save(Franchise franchise) throws ParseException {
-        franchise.setDate(
-                franchise.getDateStr()!=null&&!franchise.getDateStr().isEmpty() ?
-                        DateUtil.StringToDate(franchise.getDateStr()) : null
-        );
-        Mapper.setAuditable(toDate(franchise));
+//        franchise.setDate(
+//                franchise.getDateStr()!=null&&!franchise.getDateStr().isEmpty() ?
+//                        DateUtil.StringToDate(franchise.getDateStr()) : null
+//        );
+        Mapper.setAuditable(franchise);
         return franchiseDAO.save(franchise);
     }
 
     private Franchise toDate(Franchise franchise) {
         try{
-            franchise.setDate(
-                    franchise.getDateStr()!=null&&!franchise.getDateStr().isEmpty() ?
-                            DateUtil.StringToDate(franchise.getDateStr()) : null
+            franchise.setFranchiseDate(
+                    franchise.getFranchiseDateStr()!=null&&!franchise.getFranchiseDateStr().isEmpty() ?
+                            DateUtil.StringToDate(franchise.getFranchiseDateStr()) : null
+            );
+        }catch (Exception e){ System.out.println(e);}
+        return franchise;
+    }
+
+
+    private Franchise toString(Franchise franchise) {
+        try{
+            franchise.setFranchiseDateStr(
+                    franchise.getFranchiseDate()!=null ?
+                            DateUtil.DateToString(franchise.getFranchiseDate()) : null
             );
         }catch (Exception e){ System.out.println(e);}
         return franchise;
@@ -44,7 +56,8 @@ public class FranchiseServiceImpl implements FranchiseService {
     }
 
     @Override
-    public List<Franchise> findAll() {return franchiseDAO.findAll();}
+    public List<Franchise> findAll() {
+        return franchiseDAO.findAll().stream().map(this::toString).collect(Collectors.toList());}
 
     @Override
     public List<Franchise> saveAll(List<Franchise> franchise) {
