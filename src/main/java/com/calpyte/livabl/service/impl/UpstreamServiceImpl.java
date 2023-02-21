@@ -20,24 +20,33 @@ public class UpstreamServiceImpl implements UpstreamService {
 
     @Override
     public Upstream save(Upstream upstream) throws ParseException {
-        upstream.setDate(
-                upstream.getDateStr()!=null&&!upstream.getDateStr().isEmpty() ?
-                        DateUtil.StringToDate(upstream.getDateStr()) : null
-        );
-        Mapper.setAuditable(toDate(upstream));
+//        upstream.setUpstreamDate(
+//                upstream.getUpstreamDateStr()!=null&&!upstream.getUpstreamDateStr().isEmpty() ?
+//                        DateUtil.StringToDate(upstream.getUpstreamDateStr()) : null
+//        );
+        Mapper.setAuditable(upstream);
         return upstreamDAO.save(upstream);
     }
 
     private Upstream toDate(Upstream upstream) {
         try{
-            upstream.setDate(
-                    upstream.getDateStr()!=null&&!upstream.getDateStr().isEmpty() ?
-                            DateUtil.StringToDate(upstream.getDateStr()) : null
+            upstream.setUpstreamDate(
+                    upstream.getUpstreamDateStr()!=null&&!upstream.getUpstreamDateStr().isEmpty() ?
+                            DateUtil.StringToDate(upstream.getUpstreamDateStr()) : null
             );
         }catch (Exception e){ System.out.println(e);}
         return upstream;
     }
 
+    private Upstream toString(Upstream upstream){
+        try{
+            upstream.setUpstreamDateStr(
+                    upstream.getUpstreamDate()!=null ?
+                            DateUtil.DateToString(upstream.getUpstreamDate()) : null
+            );
+        }catch(Exception e) {System.out.println(e);}
+        return upstream;
+    }
 
     @Override
     public Upstream findById(String id) {
@@ -45,7 +54,8 @@ public class UpstreamServiceImpl implements UpstreamService {
     }
 
     @Override
-    public List<Upstream> findAll() {return upstreamDAO.findAll();}
+    public List<Upstream> findAll() {
+        return upstreamDAO.findAll().stream().map(this::toString).collect(Collectors.toList());}
 
     @Override
     public List<Upstream> saveAll(List<Upstream> upstream) {
