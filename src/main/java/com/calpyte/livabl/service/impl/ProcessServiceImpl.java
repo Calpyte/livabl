@@ -2,7 +2,6 @@ package com.calpyte.livabl.service.impl;
 
 import com.calpyte.livabl.dao.ProcessDAO;
 import com.calpyte.livabl.domain.ProcessEmissions;
-import com.calpyte.livabl.domain.StationaryCombustion;
 import com.calpyte.livabl.service.ProcessService;
 import com.calpyte.livabl.util.DateUtil;
 import com.calpyte.livabl.util.Mapper;
