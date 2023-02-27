@@ -1,6 +1,5 @@
 package com.calpyte.livabl.dao;
 
-import com.calpyte.livabl.domain.Client;
 import com.calpyte.livabl.domain.WebUser;
 
 import java.util.List;

@@ -1,7 +1,6 @@
 package com.calpyte.livabl.dao;
 
 import com.calpyte.livabl.domain.Downstream;
-import com.calpyte.livabl.domain.Franchise;
 
 import java.util.List;
 import java.util.Optional;
