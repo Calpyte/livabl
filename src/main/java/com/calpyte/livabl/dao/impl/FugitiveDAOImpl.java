@@ -2,6 +2,8 @@ package com.calpyte.livabl.dao.impl;
 
 import com.calpyte.livabl.dao.FugitiveDAO;
 import com.calpyte.livabl.domain.FugitiveEmission;
+import com.calpyte.livabl.domain.FugitiveGases;
+import com.calpyte.livabl.repository.FugitiveGasesRepository;
 import com.calpyte.livabl.repository.FugitiveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,6 +17,9 @@ public class FugitiveDAOImpl implements FugitiveDAO {
     @Autowired
     private FugitiveRepository fugitiveRepository;
 
+    @Autowired
+    private FugitiveGasesRepository fugitiveGasesRepository;
+
     @Override
     public FugitiveEmission save(FugitiveEmission fugitiveEmission) {
         return fugitiveRepository.save(fugitiveEmission);
@@ -23,6 +28,16 @@ public class FugitiveDAOImpl implements FugitiveDAO {
     @Override
     public Optional<FugitiveEmission> findById(String id) {
         return fugitiveRepository.findById(id);
+    }
+
+    @Override
+    public FugitiveGases saveGases(FugitiveGases gases) {
+        return fugitiveGasesRepository.save(gases);
+    }
+
+    @Override
+    public List<FugitiveGases> findAllGases() {
+        return fugitiveGasesRepository.findAll();
     }
 
     @Override
