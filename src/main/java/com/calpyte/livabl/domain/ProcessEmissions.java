@@ -34,4 +34,7 @@ public class ProcessEmissions extends AuditableBase{
 
     @Transient
     private String processDateStr;
+
+    private String email;
+
 }

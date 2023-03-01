@@ -1,6 +1,5 @@
 package com.calpyte.livabl.service;
 
-import com.calpyte.livabl.domain.Client;
 import com.calpyte.livabl.domain.Combustion;
 
 import java.text.ParseException;

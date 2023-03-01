@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import javax.naming.ServiceUnavailableException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -35,6 +36,17 @@ public class WebUserServiceImpl implements WebUserService {
         ResponseTokenDTO responseTokenDTO = Mapper.map(user,ResponseTokenDTO.class);
         return responseTokenDTO;
     }
+
+    @Override
+    public ResponseTokenDTO update(RegisterDTO user) throws CustomException {
+        WebUser webUser = userRepository.findByEmail(user.getEmail());
+        if(webUser!=null){
+            webUser.setIsActive(user.getIsActive());
+            userRepository.save(webUser);
+        }else throw new CustomException("No User Found");
+        return Mapper.map(webUser,ResponseTokenDTO.class);
+    }
+
 
     private RegisterDTO copyToDTO(WebUser user){
         return Mapper.map(user,RegisterDTO.class);
@@ -61,19 +73,31 @@ public class WebUserServiceImpl implements WebUserService {
     @Override
     public ResponseTokenDTO login(LoginDTO loginDTO) throws CustomException {
         WebUser user = userRepository.findByEmailAndPassword(loginDTO.getEmail(),loginDTO.getPassword());
-        if(user != null ) return Mapper.map(user,ResponseTokenDTO.class);
-        else throw  new CustomException("Invalid User");
+        if(user != null){
+            if(user.getType() == 0 && !user.getIsActive()) throw new CustomException("User Is InActive");
+            if(user.getToken()!=null && !user.getToken().isEmpty()) {
+                return Mapper.map(user,ResponseTokenDTO.class);
+            }
+            else {
+                user.setToken(RandomStringUtils.random(30,true,true));
+                WebUser webUser = userRepository.save(user);
+                return Mapper.map(webUser,ResponseTokenDTO.class);
+            }
+        }
+        else throw  new CustomException("No User Found");
     }
 
     @Override
     public ResponseTokenDTO validateUser(Map<String, String> headers) throws CustomException {
         String token =  headers.get("authorization");
         if(token!=null && !token.isEmpty() && !token.equals("null")){
-            WebUser subUser  =  userRepository.findByToken(token);
-            if(subUser!=null && !ObjectUtils.isEmpty(subUser)) return Mapper.map(subUser,ResponseTokenDTO.class);
-            else throw new CustomException("Invalid User");
+            WebUser user  =  userRepository.findByToken(token);
+              if(user!=null && !ObjectUtils.isEmpty(user)) {
+                  return Mapper.map(user,ResponseTokenDTO.class);
+              }
+              else throw new CustomException("No User Found");
         }else{
-            throw new CustomException("Invalid User");
+            throw new CustomException("Token Is Empty");
         }
     }
 
@@ -84,7 +108,14 @@ public class WebUserServiceImpl implements WebUserService {
             WebUser user  =  userRepository.findByToken(token);
             if(user!=null && !ObjectUtils.isEmpty(user)) {
                 user.setToken(RandomStringUtils.random(30,true,true));
+                userRepository.save(user);
             }
         }
     }
+
+    @Override
+    public List<RegisterDTO> findByType(Integer type) {
+        return userRepository.findByType(type).stream().map(this::copyToDTO).collect(Collectors.toList());
+    }
+
 }

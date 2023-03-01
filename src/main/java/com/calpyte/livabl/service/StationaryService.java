@@ -12,5 +12,7 @@ public interface StationaryService {
 
     List<StationaryCombustion> findAll();
 
+    List<StationaryCombustion> findAllByEmail(String email);
+
     List<StationaryCombustion> saveAll(List<StationaryCombustion> stationaryCombustions);
 }

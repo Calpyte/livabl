@@ -70,4 +70,6 @@ public class FugitiveGases extends AuditableBase{
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private FugitiveEmission fugitiveEmission;
 
+    private String email;
+
 }

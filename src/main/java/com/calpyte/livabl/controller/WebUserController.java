@@ -1,13 +1,9 @@
 package com.calpyte.livabl.controller;
 
 import com.calpyte.livabl.configuration.CustomException;
-import com.calpyte.livabl.domain.Role;
-import com.calpyte.livabl.domain.WebUser;
 import com.calpyte.livabl.dto.LoginDTO;
 import com.calpyte.livabl.dto.RegisterDTO;
 import com.calpyte.livabl.dto.ResponseTokenDTO;
-import com.calpyte.livabl.service.RoleService;
-import com.calpyte.livabl.service.SubUserService;
 import com.calpyte.livabl.service.WebUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,9 +42,19 @@ public class WebUserController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/get-all")
-    public ResponseEntity<List<RegisterDTO>> findAll() {
-        return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
+    @GetMapping(value = "/validate")
+    public ResponseEntity<ResponseTokenDTO> validate(@RequestHeader Map<String,String> headers) throws CustomException {
+        return new ResponseEntity<>(userService.validateUser(headers), HttpStatus.CREATED);
+    }
+
+    @GetMapping(value = "/by-type")
+    public ResponseEntity<List<RegisterDTO>> byType(@RequestParam("type") Integer type) {
+        return new ResponseEntity<>(userService.findByType(type), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/update")
+    public ResponseEntity<?> update(@RequestBody RegisterDTO registerDTO) throws CustomException {
+        return new ResponseEntity<>(userService.update(registerDTO), HttpStatus.OK);
     }
 
     @GetMapping(value = "/by-id")

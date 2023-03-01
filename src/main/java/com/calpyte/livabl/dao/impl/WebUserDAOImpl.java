@@ -34,4 +34,9 @@ public class WebUserDAOImpl implements WebUserDAO {
     public List<WebUser> saveAll(List<WebUser> users) {
         return userRepository.saveAll(users);
     }
+
+    @Override
+    public List<WebUser> findByType(Integer type) {
+        return userRepository.findByType(type);
+    }
 }

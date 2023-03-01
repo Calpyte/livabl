@@ -13,4 +13,6 @@ public interface WebUserDAO {
     List<WebUser> findAll();
 
     List<WebUser> saveAll(List<WebUser> users);
+
+    List<WebUser> findByType(Integer type);
 }

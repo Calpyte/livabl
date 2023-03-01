@@ -8,6 +8,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Where;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -27,7 +28,9 @@ public class WebUser extends  AuditableBase{
     private String password;
     private String temppass;
     private String token;
+    private Integer type;
 
-    @JsonIgnore
-    private UserType type;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isActive;
+
 }

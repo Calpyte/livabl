@@ -31,6 +31,11 @@ public class StationaryDAOImpl implements StationaryDAO {
     }
 
     @Override
+    public List<StationaryCombustion> findByUser(String email) {
+        return repository.findAllByEmail(email);
+    }
+
+    @Override
     public List<StationaryCombustion> saveAll(List<StationaryCombustion> stationaryCombustions) {
         return repository.saveAll(stationaryCombustions);
     }

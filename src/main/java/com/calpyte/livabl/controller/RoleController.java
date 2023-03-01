@@ -1,8 +1,6 @@
 package com.calpyte.livabl.controller;
 
-import com.calpyte.livabl.domain.Client;
 import com.calpyte.livabl.domain.Role;
-import com.calpyte.livabl.service.ClientService;
 import com.calpyte.livabl.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
