@@ -13,5 +13,9 @@ public interface StationaryDAO {
 
     List<StationaryCombustion> findAll();
 
+    List<StationaryCombustion> findByUser(String email);
+
     List<StationaryCombustion> saveAll(List<StationaryCombustion> stationaryCombustions);
+
+
 }

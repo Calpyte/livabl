@@ -10,4 +10,6 @@ public class RegisterDTO {
     private String fname;
     private String password;
     private String temppass;
+    private Boolean isActive;
+    private int type;
 }

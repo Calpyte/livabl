@@ -60,6 +60,6 @@ public class FugitiveEmission extends AuditableBase{
     @OneToMany(mappedBy = "fugitiveEmission")
     private List<FugitiveGases> gases;
 
-
+    private String email;
 
 }

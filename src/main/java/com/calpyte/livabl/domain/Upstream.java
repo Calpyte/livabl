@@ -1,5 +1,6 @@
 package com.calpyte.livabl.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -156,5 +157,6 @@ public class Upstream extends AuditableBase{
     @JsonProperty("period")
     private Long leasePeriod;
 
+    private String email;
 
 }

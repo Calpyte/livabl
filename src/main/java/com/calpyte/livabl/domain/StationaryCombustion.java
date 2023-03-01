@@ -53,4 +53,7 @@ public class StationaryCombustion extends AuditableBase{
     private Double ch4;
     private Double co2;
     private Double no2;
+
+    private String email;
+
 }

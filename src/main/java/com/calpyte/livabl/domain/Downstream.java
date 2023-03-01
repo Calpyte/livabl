@@ -120,4 +120,7 @@ public class Downstream extends AuditableBase{
 
     @JsonProperty("location2")
     private String investmentLocation;
+
+    private String email;
+
 }

@@ -88,4 +88,6 @@ public class CapitalGoods extends AuditableBase{
     private String buildingLocation;
 
     private String energy;
+
+    private String email;
 }

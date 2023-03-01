@@ -44,4 +44,6 @@ public class Franchise extends AuditableBase{
     private String investmentType;
 
     private String location;
+
+    private String email;
 }

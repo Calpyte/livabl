@@ -1,5 +1,6 @@
 package com.calpyte.livabl.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -7,6 +8,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Where;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -18,23 +20,17 @@ import javax.persistence.Table;
 @Entity
 @Where(clause = "is_deleted = false")
 public class WebUser extends  AuditableBase{
+    public  enum UserType{ CLIENT, SUBUSER, ADMIN }
 
-    @JsonProperty("name")
-    private String name;
-
-    @JsonProperty("email")
+    private String cpassword;
     private String email;
-
-    @JsonProperty("password")
+    private String fname;
     private String password;
+    private String temppass;
+    private String token;
+    private Integer type;
 
-    @JsonProperty("active")
-    private Boolean active;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "role_id", nullable = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Role role;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isActive;
 
 }

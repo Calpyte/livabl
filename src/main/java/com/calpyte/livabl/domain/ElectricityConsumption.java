@@ -33,4 +33,6 @@ public class ElectricityConsumption extends AuditableBase{
     private Double energyConsumption;
 
     private Double co2;
+
+    private String email;
 }

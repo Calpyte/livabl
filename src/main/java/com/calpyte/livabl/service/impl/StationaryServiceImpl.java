@@ -61,6 +61,11 @@ public class StationaryServiceImpl implements StationaryService {
     }
 
     @Override
+    public List<StationaryCombustion> findAllByEmail(String email) {
+        return stationaryDAO.findByUser(email).stream().map(this::toString).collect(Collectors.toList());
+    }
+
+    @Override
     public List<StationaryCombustion> saveAll(List<StationaryCombustion> stationaryCombustions) {
         return stationaryDAO.saveAll(stationaryCombustions.stream().map(stationary ->{
             Mapper.setAuditable(toDate(stationary));
