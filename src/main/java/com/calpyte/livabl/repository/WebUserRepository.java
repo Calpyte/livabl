@@ -6,4 +6,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WebUserRepository  extends JpaRepository<WebUser, String> {
+
+    WebUser findByEmailAndPassword(String email, String password);
+
+    WebUser findByToken(String token);
+
+    WebUser findByEmail(String email);
 }

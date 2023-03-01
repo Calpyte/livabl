@@ -1,16 +1,25 @@
 package com.calpyte.livabl.service;
 
+import com.calpyte.livabl.configuration.CustomException;
 import com.calpyte.livabl.domain.WebUser;
+import com.calpyte.livabl.dto.LoginDTO;
+import com.calpyte.livabl.dto.RegisterDTO;
+import com.calpyte.livabl.dto.ResponseTokenDTO;
 
 import java.util.List;
+import java.util.Map;
 
 public interface WebUserService {
 
-    WebUser save (WebUser user);
+    ResponseTokenDTO save(RegisterDTO registerDTO) throws CustomException;
 
-    WebUser findById(String id);
+    RegisterDTO findById(String id);
 
-    List<WebUser> findAll();
+    List<RegisterDTO> findAll();
 
-    List<WebUser> saveAll(List<WebUser> users);
+    ResponseTokenDTO login(LoginDTO loginDTO) throws CustomException;
+
+    ResponseTokenDTO validateUser(Map<String,String> headers) throws CustomException;
+
+    void logout(Map<String,String> headers);
 }
