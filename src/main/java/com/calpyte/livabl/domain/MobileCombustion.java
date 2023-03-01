@@ -56,4 +56,8 @@ public class MobileCombustion extends AuditableBase{
     private String air2;
     private String water;
     private String rail;
+
+    private Double ch4;
+    private Double co2;
+    private Double no2;
 }

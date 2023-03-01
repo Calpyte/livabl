@@ -3,6 +3,7 @@ package com.calpyte.livabl.service.impl;
 import com.calpyte.livabl.dao.FugitiveDAO;
 import com.calpyte.livabl.dao.MobileDAO;
 import com.calpyte.livabl.domain.FugitiveEmission;
+import com.calpyte.livabl.domain.FugitiveGases;
 import com.calpyte.livabl.domain.MobileCombustion;
 import com.calpyte.livabl.domain.StationaryCombustion;
 import com.calpyte.livabl.service.FugitiveService;
@@ -70,4 +71,18 @@ public class FugitiveServiceImpl implements FugitiveService {
             return fugitive;
         }).collect(Collectors.toList()));
     }
+
+    @Override
+    public FugitiveGases saveGases(FugitiveGases gases) {
+        Mapper.setAuditable(gases);
+        fugitiveDAO.saveGases(gases);
+        return gases;
+    }
+
+    @Override
+    public List<FugitiveGases> findAllGases() {
+        return fugitiveDAO.findAllGases();
+    }
+
+
 }
