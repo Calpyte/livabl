@@ -5,10 +5,9 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Entity
 @Data
-@Table(name="sample")
-public class Sample extends AuditableBase{
+@Entity
+@Table(name = "role")
+public class Role extends IdentifiableBase{
     private String name;
-
 }
