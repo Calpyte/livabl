@@ -29,6 +29,11 @@ public class CapitalGoodsDAOImpl implements CapitalGoodsDAO {
     }
 
     @Override
+    public List<CapitalGoods> findByUser(String email) {
+        return capitalGoodsRepository.findAllByEmail(email);
+    }
+
+    @Override
     public Optional<CapitalGoods> findById(String id) {
         return capitalGoodsRepository.findById(id);
     }

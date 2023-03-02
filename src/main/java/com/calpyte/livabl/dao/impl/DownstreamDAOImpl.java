@@ -31,6 +31,11 @@ public class DownstreamDAOImpl implements DownstreamDAO {
     }
 
     @Override
+    public List<Downstream> findByUser(String email) {
+        return downStreamRepository.findAllByEmail(email);
+    }
+
+    @Override
     public Optional<Downstream> findById(String id) {
         return downStreamRepository.findById(id);
     }

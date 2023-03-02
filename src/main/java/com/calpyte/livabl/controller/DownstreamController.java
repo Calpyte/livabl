@@ -2,6 +2,7 @@ package com.calpyte.livabl.controller;
 
 import com.calpyte.livabl.configuration.CustomException;
 import com.calpyte.livabl.domain.Downstream;
+import com.calpyte.livabl.domain.FugitiveEmission;
 import com.calpyte.livabl.service.DownstreamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,11 @@ public class DownstreamController {
     @GetMapping(value = "/get-all")
     public ResponseEntity<List<Downstream>> findAll() {
         return new ResponseEntity<>(downstreamService.findAll(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/by-user")
+    public ResponseEntity<List<Downstream>> getByUser(@RequestParam("email") String email) {
+        return new ResponseEntity<>(downstreamService.findAllByEmail(email), HttpStatus.OK);
     }
 
     @GetMapping(value = "/by-id")

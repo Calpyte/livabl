@@ -80,8 +80,28 @@ public class FugitiveServiceImpl implements FugitiveService {
     }
 
     @Override
+    public List<FugitiveEmission> findAllByEmail(String email) {
+        return fugitiveDAO.findByUser(email).stream().map(this::toString).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<FugitiveGases> findByUsers(String email) {
+        return fugitiveDAO.findByGases(email).stream().map(this::getGases).collect(Collectors.toList());
+    }
+
+    @Override
     public List<FugitiveGases> findAllGases() {
         return fugitiveDAO.findAllGases();
+    }
+
+    private FugitiveGases getGases(FugitiveGases fugitiveGases) {
+        try{
+            fugitiveGases.setFugitiveGasDateStr(
+                    fugitiveGases.getFugitiveGasDate()!=null ?
+                            DateUtil.DateToString(fugitiveGases.getFugitiveGasDate()) : null
+            );
+        }catch (Exception e){ System.out.println(e);}
+        return fugitiveGases;
     }
 
 

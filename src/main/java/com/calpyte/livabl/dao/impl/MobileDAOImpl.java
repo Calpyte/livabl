@@ -31,6 +31,11 @@ public class MobileDAOImpl implements MobileDAO {
     }
 
     @Override
+    public List<MobileCombustion> findByUser(String email) {
+        return mobileRepository.findAllByEmail(email);
+    }
+
+    @Override
     public List<MobileCombustion> saveAll(List<MobileCombustion> mobileCombustions) {
         return mobileRepository.saveAll(mobileCombustions);
     }

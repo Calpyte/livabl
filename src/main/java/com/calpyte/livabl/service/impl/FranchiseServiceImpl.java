@@ -60,6 +60,11 @@ public class FranchiseServiceImpl implements FranchiseService {
         return franchiseDAO.findAll().stream().map(this::toString).collect(Collectors.toList());}
 
     @Override
+    public List<Franchise> findAllByEmail(String email) {
+        return franchiseDAO.findByUser(email).stream().map(this::toString).collect(Collectors.toList());
+    }
+
+    @Override
     public List<Franchise> saveAll(List<Franchise> franchise) {
         return franchiseDAO.saveAll(franchise.stream().map(mobile ->{
             Mapper.setAuditable(toDate(mobile));

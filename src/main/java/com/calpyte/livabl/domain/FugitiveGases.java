@@ -72,4 +72,8 @@ public class FugitiveGases extends AuditableBase{
 
     private String email;
 
+    private Double co2;
+
+    private Double co3;
+
 }

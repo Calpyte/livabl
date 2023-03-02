@@ -1,6 +1,7 @@
 package com.calpyte.livabl.controller;
 
 import com.calpyte.livabl.configuration.CustomException;
+import com.calpyte.livabl.domain.FugitiveEmission;
 import com.calpyte.livabl.domain.ProcessEmissions;
 import com.calpyte.livabl.service.ProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,11 @@ public class ProcessController {
     @GetMapping(value = "/get-all")
     public ResponseEntity<List<ProcessEmissions>> findAll() {
         return new ResponseEntity<>(processService.findAll(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/by-user")
+    public ResponseEntity<List<ProcessEmissions>> getByUser(@RequestParam("email") String email) {
+        return new ResponseEntity<>(processService.findAllByEmail(email), HttpStatus.OK);
     }
 
     @GetMapping(value = "/by-id")

@@ -29,6 +29,11 @@ public class ElectricityServiceImpl implements ElectricityService {
         return electricityDAO.save(consumption);
     }
 
+    @Override
+    public List<ElectricityConsumption> findAllByEmail(String email) {
+        return electricityDAO.findByUser(email).stream().map(this::toString).collect(Collectors.toList());
+    }
+
     private ElectricityConsumption toDate(ElectricityConsumption consumption){
         try{
             consumption.setElectricityDate(
