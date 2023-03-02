@@ -30,6 +30,11 @@ public class UpstreamDAOImpl implements UpstreamDAO{
     }
 
     @Override
+    public List<Upstream> findByUser(String email) {
+        return upstreamRepository.findAllByEmail(email);
+    }
+
+    @Override
     public Optional<Upstream> findById(String id) {
         return upstreamRepository.findById(id);
     }

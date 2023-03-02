@@ -2,6 +2,7 @@ package com.calpyte.livabl.dao;
 
 import com.calpyte.livabl.domain.FugitiveEmission;
 import com.calpyte.livabl.domain.FugitiveGases;
+import com.calpyte.livabl.domain.StationaryCombustion;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,5 +19,10 @@ public interface FugitiveDAO {
 
     FugitiveGases saveGases(FugitiveGases gases);
 
+    List<FugitiveEmission> findByUser(String email);
+
+    List<FugitiveGases> findByGases(String email);
+
     List<FugitiveGases> findAllGases();
+
 }

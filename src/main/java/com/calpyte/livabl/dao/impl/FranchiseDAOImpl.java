@@ -31,6 +31,11 @@ public class FranchiseDAOImpl implements FranchiseDAO {
     }
 
     @Override
+    public List<Franchise> findByUser(String email) {
+        return franchiseRepository.findAllByEmail(email);
+    }
+
+    @Override
     public Optional<Franchise> findById(String id) {
         return franchiseRepository.findById(id);
     }

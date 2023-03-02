@@ -63,6 +63,11 @@ public class UpstreamServiceImpl implements UpstreamService {
         return upstreamDAO.findAll().stream().map(this::toString).collect(Collectors.toList());}
 
     @Override
+    public List<Upstream> findAllByEmail(String email) {
+        return  upstreamDAO.findByUser(email).stream().map(this::toString).collect(Collectors.toList());
+    }
+
+    @Override
     public List<Upstream> saveAll(List<Upstream> upstream) {
         return upstreamDAO.saveAll(upstream.stream().map(mobile ->{
             Mapper.setAuditable(toDate(mobile));

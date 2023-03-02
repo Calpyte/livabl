@@ -60,6 +60,11 @@ public class CapitalGoodsServiceImpl implements CapitalGoodsService {
         return capitalGoodsDAO.findAll().stream().map(this::toString).collect(Collectors.toList());}
 
     @Override
+    public List<CapitalGoods> findAllByEmail(String email) {
+        return capitalGoodsDAO.findByUser(email).stream().map(this::toString).collect(Collectors.toList());
+    }
+
+    @Override
     public List<CapitalGoods> saveAll(List<CapitalGoods> capitalGoods) {
         return capitalGoodsDAO.saveAll(capitalGoods.stream().map(mobile ->{
             Mapper.setAuditable(toDate(mobile));
