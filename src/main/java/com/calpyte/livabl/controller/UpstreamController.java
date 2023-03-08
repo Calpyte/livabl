@@ -2,6 +2,8 @@ package com.calpyte.livabl.controller;
 
 import com.calpyte.livabl.configuration.CustomException;
 import com.calpyte.livabl.domain.CapitalGoods;
+import com.calpyte.livabl.domain.FugitiveEmission;
+import com.calpyte.livabl.domain.StationaryCombustion;
 import com.calpyte.livabl.domain.Upstream;
 import com.calpyte.livabl.service.CapitalGoodsService;
 import com.calpyte.livabl.service.UpstreamService;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/upstream")
@@ -33,6 +36,11 @@ public class UpstreamController {
     @GetMapping(value = "/get-all")
     public ResponseEntity<List<Upstream>> findAll() {
         return new ResponseEntity<>(upstreamService.findAll(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/by-user")
+    public ResponseEntity<List<Upstream>> getByUser(@RequestParam("email") String email) {
+        return new ResponseEntity<>(upstreamService.findAllByEmail(email), HttpStatus.OK);
     }
 
     @GetMapping(value = "/by-id")

@@ -2,6 +2,7 @@ package com.calpyte.livabl.controller;
 
 import com.calpyte.livabl.configuration.CustomException;
 import com.calpyte.livabl.domain.ElectricityConsumption;
+import com.calpyte.livabl.domain.FugitiveEmission;
 import com.calpyte.livabl.service.ElectricityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,11 @@ public class ElectricityController {
     @GetMapping(value = "/get-all")
     public ResponseEntity<List<ElectricityConsumption>> findAll() {
         return new ResponseEntity<>(electricityService.findAll(),HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/by-user")
+    public ResponseEntity<List<ElectricityConsumption>> getByUser(@RequestParam("email") String email) {
+        return new ResponseEntity<>(electricityService.findAllByEmail(email), HttpStatus.OK);
     }
 
     @GetMapping(value ="/by-id")

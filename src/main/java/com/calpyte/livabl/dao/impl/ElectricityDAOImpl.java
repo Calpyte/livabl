@@ -29,5 +29,10 @@ public class ElectricityDAOImpl implements ElectricityDAO {
     public List<ElectricityConsumption> findAll(){ return electricityRepository.findAll();}
 
     @Override
+    public List<ElectricityConsumption> findByUser(String email) {
+        return electricityRepository.findAllByEmail(email);
+    }
+
+    @Override
     public Optional<ElectricityConsumption> findById(String id){ return electricityRepository.findById(id);}
 }

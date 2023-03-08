@@ -60,6 +60,11 @@ public class ProcessServiceImpl implements ProcessService {
     }
 
     @Override
+    public List<ProcessEmissions> findAllByEmail(String email) {
+        return processDAO.findByUser(email).stream().map(this::toString).collect(Collectors.toList());
+    }
+
+    @Override
     public List<ProcessEmissions> saveAll(List<ProcessEmissions> processEmissions) {
         return processDAO.saveAll(processEmissions.stream().map(process ->{
             Mapper.setAuditable(toDate(process));

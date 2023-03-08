@@ -3,6 +3,7 @@ package com.calpyte.livabl.controller;
 import com.calpyte.livabl.configuration.CustomException;
 import com.calpyte.livabl.domain.CapitalGoods;
 import com.calpyte.livabl.domain.Franchise;
+import com.calpyte.livabl.domain.FugitiveEmission;
 import com.calpyte.livabl.service.FranchiseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,6 +33,11 @@ public class FranchiseController {
     @GetMapping(value = "/get-all")
     public ResponseEntity<List<Franchise>> findAll() {
         return new ResponseEntity<>(franchiseService.findAll(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/by-user")
+    public ResponseEntity<List<Franchise>> getByUser(@RequestParam("email") String email) {
+        return new ResponseEntity<>(franchiseService.findAllByEmail(email), HttpStatus.OK);
     }
 
     @GetMapping(value = "/by-id")

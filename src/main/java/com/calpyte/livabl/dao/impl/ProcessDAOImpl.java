@@ -31,6 +31,11 @@ public class ProcessDAOImpl implements ProcessDAO {
     }
 
     @Override
+    public List<ProcessEmissions> findByUser(String email) {
+        return processRepository.findAllByEmail(email);
+    }
+
+    @Override
     public List<ProcessEmissions> saveAll(List<ProcessEmissions> processEmissions) {
         return processRepository.saveAll(processEmissions);
     }

@@ -1,5 +1,6 @@
 package com.calpyte.livabl.dao;
 
+import com.calpyte.livabl.domain.StationaryCombustion;
 import com.calpyte.livabl.domain.Upstream;
 
 import java.util.List;
@@ -12,6 +13,8 @@ public interface UpstreamDAO {
     List<Upstream> saveAll(List<Upstream> upstream);
 
     List<Upstream> findAll();
+
+    List<Upstream> findByUser(String email);
 
     Optional<Upstream> findById(String id);
 }

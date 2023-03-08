@@ -36,6 +36,16 @@ public class FugitiveDAOImpl implements FugitiveDAO {
     }
 
     @Override
+    public List<FugitiveEmission> findByUser(String email) {
+        return fugitiveRepository.findAllByEmail(email);
+    }
+
+    @Override
+    public List<FugitiveGases> findByGases(String email) {
+        return fugitiveGasesRepository.findAllByEmail(email);
+    }
+
+    @Override
     public List<FugitiveGases> findAllGases() {
         return fugitiveGasesRepository.findAll();
     }

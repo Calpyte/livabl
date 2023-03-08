@@ -60,6 +60,11 @@ public class MobileServiceImpl implements MobileService {
         return mobileDAO.findAll().stream().map(this::toString).collect(Collectors.toList());}
 
     @Override
+    public List<MobileCombustion> findAllByEmail(String email) {
+        return mobileDAO.findByUser(email).stream().map(this::toString).collect(Collectors.toList());
+    }
+
+    @Override
     public List<MobileCombustion> saveAll(List<MobileCombustion> mobileCombustions) {
         return mobileDAO.saveAll(mobileCombustions.stream().map(mobile ->{
             Mapper.setAuditable(toDate(mobile));
