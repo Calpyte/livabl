@@ -2,6 +2,7 @@ package com.calpyte.livabl.service.impl;
 
 import com.calpyte.livabl.dao.MessageDAO;
 import com.calpyte.livabl.domain.Message;
+import com.calpyte.livabl.dto.MessageDTO;
 import com.calpyte.livabl.service.MessageService;
 import com.calpyte.livabl.util.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,6 +40,7 @@ public class MessageServiceImpl implements MessageService{
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(fromId);
         message.setTo(messageObj.getToId());
+        message.setCc();
         message.setSubject(messageObj.getSubject());
         message.setText(messageObj.getBody());
         emailSender.send(message);
@@ -57,5 +60,21 @@ public class MessageServiceImpl implements MessageService{
     public List<Message> saveAll(List<Message> messages) {
         messages.forEach(message -> sendSimpleMessage(message));
         return messageDAO.saveAll(messages.stream().map(message -> {Mapper.setAuditable(message); return message;}).collect(Collectors.toList()));
+    }
+
+    @Override
+    public MessageDTO sendHelpMessage(MessageDTO messageObj) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(fromId);
+        String[] toList = {"jyothsna1910@gmail.com" , "manoj.jeganathan93@gmail.com",
+        "beyondsustainability2040@gmail.com", "beyostech101@gmail.com"};
+//        toList.add();
+//        toList.add();
+        message.setTo(toList);
+        message.setCc();
+        message.setSubject(messageObj.getSubject());
+        message.setText(messageObj.getRegarding());
+        emailSender.send(message);
+        return messageObj;
     }
 }

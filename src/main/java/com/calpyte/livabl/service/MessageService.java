@@ -1,6 +1,7 @@
 package com.calpyte.livabl.service;
 
 import com.calpyte.livabl.domain.Message;
+import com.calpyte.livabl.dto.MessageDTO;
 
 import java.util.List;
 
@@ -12,4 +13,6 @@ public interface MessageService {
     List<Message> findAll();
 
     List<Message> saveAll(List<Message> messages);
+
+    MessageDTO sendHelpMessage(MessageDTO messageDTO);
 }

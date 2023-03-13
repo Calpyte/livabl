@@ -7,6 +7,7 @@ import org.hibernate.annotations.Where;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.List;
 
 @Data
 @Table
@@ -26,4 +27,6 @@ public class Message extends AuditableBase{
     @JsonProperty("text")
     @Column(columnDefinition = "text")
     private String body;
+
+    private String cc;
 }

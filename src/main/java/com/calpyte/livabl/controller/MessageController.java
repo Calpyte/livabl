@@ -1,16 +1,12 @@
 package com.calpyte.livabl.controller;
 
 import com.calpyte.livabl.domain.Message;
+import com.calpyte.livabl.dto.MessageDTO;
 import com.calpyte.livabl.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,5 +35,10 @@ public class MessageController {
     @GetMapping(value = "/by-id")
     public ResponseEntity<Message> findById(@RequestParam("id") String id) {
         return new ResponseEntity<>(messageService.findById(id), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/help-mail")
+    public ResponseEntity<MessageDTO> helpMail(@RequestBody MessageDTO messageDTO){
+        return new ResponseEntity<>(messageService.sendHelpMessage(messageDTO),HttpStatus.OK);
     }
 }
