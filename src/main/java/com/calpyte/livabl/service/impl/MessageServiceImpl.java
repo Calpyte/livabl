@@ -63,18 +63,16 @@ public class MessageServiceImpl implements MessageService{
     }
 
     @Override
-    public MessageDTO sendHelpMessage(MessageDTO messageObj) {
+    public MessageDTO sendHelpMessage(MessageDTO messageDTO) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(fromId);
         String[] toList = {"jyothsna1910@gmail.com" , "manoj.jeganathan93@gmail.com",
-        "beyondsustainability2040@gmail.com", "beyostech101@gmail.com"};
-//        toList.add();
-//        toList.add();
+        "beyondsustainability2040@gmail.com","beyostech101@gmail.com"};
         message.setTo(toList);
         message.setCc();
-        message.setSubject(messageObj.getSubject());
-        message.setText(messageObj.getRegarding());
+        message.setSubject(messageDTO.getSubject());
+        message.setText(messageDTO.getBody());
         emailSender.send(message);
-        return messageObj;
+        return messageDTO;
     }
 }
